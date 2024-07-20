@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Portal Registration</title>
+    <link rel="stylesheet" href="css/register.css">
+   
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <img src="images/NeuroGiant_logo.png" alt="Company Logo">
+    </div>
+
+    <form id="registrationForm" onsubmit="return validateForm()"
+          th:object="${register}" th:action="regData" th:method="post">
+        <h2 >Registration Form</h2>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input th:field="*{fullName}" type="text" id="fullName" name="fullName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email ID</label>
+            <input th:field="*{emailID}" type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input th:field="*{password}" type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="mobileNumber">Mobile Number</label>
+            <input th:field="*{mobileNumber}" type="tel" id="mobileNumber" name="mobileNumber" required>
+        </div>
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        const fullName = document.querySelector('#fullName');
+        const emailID = document.querySelector('#email');
+        const password = document.querySelector('#password');
+        const mobileNumber = document.querySelector('#mobileNumber');
+
+        if (fullName.value.length < 3) {
+            alert('Please enter a valid full name.');
+            return false;
+        }
+
+        if (!emailID.value.includes('@')) {
+            alert('Please enter a valid email address.');
+            return false;
+        }
+
+        if (password.value.length < 8) {
+            alert('Please enter a password with at least 8 characters.');
+            return false;
+        }
+
+        if (!mobileNumber.value.match(/^\d{10}$/)) {
+            alert('Please enter a valid mobile number.');
+            return false;
+        }
+
+        // Create a JSON object with the form data
+        const formData = {
+            fullName: fullName.value,
+            emailID: emailID.value,
+            password: password.value,
+            mobileNumber: mobileNumber.value
+        };
+
+        // Log the JSON object to the console
+        console.log(JSON.stringify(formData));
+
+        alert('Registration successful!');
+        return true;
+    }
+</script>
+
+</body>
+</html>

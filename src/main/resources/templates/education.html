@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Details Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+ 
+        .container {
+            margin-top: 50px;
+        }
+ 
+        .form-group label {
+            font-weight: bold;
+        }
+ 
+        .form-group input[type="text"],
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+ 
+        .form-check-inline label {
+            margin-right: 20px;
+        }
+ 
+        .button-group {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center">Add Education</h2>
+        <form id="educationForm">
+            <div class="form-group">
+                <label for="education">Education:</label>
+                <select id="education" name="education" class="form-control" required>
+                    <option value="">Select Education</option>
+                    <option value="High School">High School</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="Master's Degree">Master's Degree</option>
+                    <option value="Doctorate">Doctorate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="university">University/Institute:</label>
+                <input type="text" id="university" name="university" class="form-control"
+                    placeholder="Enter your university or institute..." required>
+            </div>
+            <div class="form-group">
+                <label for="course">Course:</label>
+                <select id="course" name="course" class="form-control" required>
+                    <option value="">Select Course</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Business Administration">Business Administration</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="specialization">Specialization:</label>
+                <select id="specialization" name="specialization" class="form-control" required>
+                    <option value="">Select Specialization</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Finance">Finance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Course Type:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="fullTime" name="courseType" value="full-time"
+                        required>
+                    <label class="form-check-label" for="fullTime">Full Time</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="partTime" name="courseType" value="part-time"
+                        required>
+                    <label class="form-check-label" for="partTime">Part Time</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="correspondence" name="courseType"
+                        value="correspondence" required>
+                    <label class="form-check-label" for="correspondence">Correspondence/Distance Learning</label>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-md-6">
+                    <label for="startYear">Starting Year:</label>
+                    <select id="startYear" name="startYear" class="form-control" required>
+                        <option value="">Select Starting Year</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="endYear">Ending Year:</label>
+                    <select id="endYear" name="endYear" class="form-control" required>
+                        <option value="">Select Ending Year</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gradingSystem">Grading System:</label>
+                <select id="gradingSystem" name="gradingSystem" class="form-control" required>
+                    <option value="">Select Grading System</option>
+                    <option value="A-F">A-F</option>
+                    <option value="1-10">1-10</option>
+                    <option value="Pass/Fail">Pass/Fail</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary mr-2" onclick="cancelForm()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Save</button>
+            </div>
+        </form>
+    </div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let formDataList = []; // Array to store form data objects
+
+        function cancelForm() {
+            document.getElementById("educationForm").reset();
+        }
+
+        function submitForm() {
+           // if (validateForm()) {
+                const formData = {
+                /*     education: document.getElementById("education").value,
+                    university: document.getElementById("university").value,
+                    course: document.getElementById("course").value,
+                    specialization: document.getElementById("specialization").value,
+                    courseType: document.querySelector('input[name="courseType"]:checked').value,
+                    startYear: document.getElementById("startYear").value,
+                    endYear: document.getElementById("endYear").value,
+                    gradingSystem: document.getElementById("gradingSystem").value */
+                };
+                formDataList.push(formData); // Push form data object to array
+                console.log(formDataList); // Print array of form data to console
+               // Send form data to the server using AJAX
+             
+            $.ajax({
+                url: "/edu", // Your controller endpoint
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(formDataList), // Convert formData to JSON string
+                
+                success: function(response) {
+                    console.log("Form data saved successfully:", response);
+                    // Optionally reset the form after saving
+                    document.getElementById("educationForm").reset();
+                    window.location.href ="/gethome";
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error saving form data:", error);
+                }
+            });
+            }
+      //  }
+
+        function validateForm() {
+            const education = document.getElementById("education").value;
+            const university = document.getElementById("university").value;
+            const course = document.getElementById("course").value;
+            const specialization = document.getElementById("specialization").value;
+            const courseType = document.querySelector('input[name="courseType"]:checked');
+            const startYear = document.getElementById("startYear").value;
+            const endYear = document.getElementById("endYear").value;
+            const gradingSystem = document.getElementById("gradingSystem").value;
+            if (!education || !university || !course || !specialization || !courseType || !startYear || !endYear || !gradingSystem) {
+                alert("Please fill in all fields");
+                return false;
+            }
+            if (parseInt(startYear) > parseInt(endYear)) {
+                alert("Starting year cannot be greater than ending year");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+ 
+</html>

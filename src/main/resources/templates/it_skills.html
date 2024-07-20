@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Skills Form</title>
+<link rel="stylesheet" href="css/itskills.css">
+</head>
+<body>
+ 
+<div class="container" th:fragment="it_skillsFragment">
+
+    <h2>IT Skills</h2>
+ 
+    <form id="itSkillsForm" method="post" action="/saveSkills">
+        <div class="form-group">
+            <label for="skillName">Skill/Software Name:</label>
+            <select id="skillName" name="skillName">
+                <option value="">Select Skill/Software</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="JavaScript">JavaScript</option>
+                <!-- Add more skills/software as needed -->
+            </select>
+        </div>
+ 
+        <div class="form-group">
+            <label for="experienceYears">Experience:</label>
+            <select id="experienceYears" name="experienceYears">
+                <option value="">Years</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <!-- Add more years as needed -->
+            </select>
+        </div>
+ 
+        <div id="skillsContainer"></div>
+ 
+        <div id="selectedSkillsHeading" style="display: none;">
+            <h3>Selected Skills</h3>
+            <div id="selectedSkills"></div>
+        </div>
+ 
+        <div class="button-group">
+            <button type="button" onclick="addSkill()">Add Skill</button>
+            <button type="button" onclick="submitForm()">Save</button>
+            <button type="button" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+    
+</div>
+ 
+<script src="js/itskills.js"></script>
+ 
+</body>
+</html>

@@ -1,0 +1,237 @@
+/* Styles for the welcome section */
+        .welcome-section {
+            background-image: url("https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg?w=900&t=st=1710530977~exp=1710531577~hmac=1e63e82669403d7d702fc367b0512f32e8f9becab1a90149d4344310f8786bf6");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+ 
+ 
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 2s forwards; /* Animation to fade in */
+        }
+ 
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+ 
+        /* Apply transition to all elements within the welcome section */
+        .welcome-section * {
+            transition: opacity 2s ease;
+        }
+ 
+        /* Additional styles */
+        .btn-group {
+            margin-top: 20px;
+        }
+ 
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: transparent; /* Transparent background */
+            transition: top 0.3s; /* Smooth transition */
+            padding: 10px 20px; /* Add some padding */
+        }
+ 
+        .navbar-brand {
+            font-size: 1rem; /* Adjusted font size */
+            margin-right: 20px; /* Add margin between navbar items */
+        }
+ 
+        .navbar-nav .nav-link {
+            color: white !important; /* Set text color to white */
+            font-size: 1rem; /* Medium font size */
+        }
+ 
+        /* Styles for the text on the right side */
+        .navbar-right-text {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            line-height: 50px; /* Adjust this value for vertical alignment */
+            color: white;
+            font-size: 1rem; /* Medium font size */
+        }
+ 
+        /* CSS for the services container */
+        .services-container {
+            position: absolute;
+            top: 100%; /* Position below the navbar */
+            left: 5%;
+            display: none; /* Initially hide */
+            width: 20%;
+            background: -webkit-linear-gradient(to right, #1ea3b1, #445fed, #1d6197); /* Gradient background */
+            background: linear-gradient(to right, #1ea3b1, #445fed, #1d6197); /* Gradient background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Ensure it's above navbar */
+            transition: opacity 0.5s, transform 0.5s; /* Add transition effects */
+            transform: translateY(-10px); /* Move up slightly for smoother transition */
+            color: white; /* Text color */
+        }
+ 
+        .services-list li {
+            margin-bottom: 5px;
+            /* Thin line between each service */
+            padding-bottom: 5px; /* Add some spacing between items */
+        }
+ 
+        /* Show services container when hovering over services-link */
+        .services-link:hover + .services-container {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+ 
+        /* CSS for the contact container */
+        .contact-container {
+            position: absolute;
+            top: 100%; /* Position below the navbar */
+            left: 5%;
+            display: none; /* Initially hide */
+            width: 20%;
+            background: -webkit-linear-gradient(to right, #1ea3b1, #445fed, #1d6197); /* Gradient background */
+            background: linear-gradient(to right, #1ea3b1, #445fed, #1d6197); /* Gradient background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Ensure it's above navbar */
+            transition: opacity 0.5s, transform 0.5s; /* Add transition effects */
+            transform: translateY(-10px); /* Move up slightly for smoother transition */
+            color: white; /* Text color */
+        }
+ 
+        .contact-list li {
+            margin-bottom: 5px;
+            /* Thin line between each contact */
+            padding-bottom: 5px; /* Add some spacing between items */
+        }
+ 
+        /* Show contact container when hovering over about-us-link */
+        .about-us-link:hover + .contact-container {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+ 
+        /* CSS for the footer */
+        footer {
+            background: -webkit-linear-gradient(to right, #00AF6B, #1ea3b1, #1d6197);
+            background: linear-gradient(to right, #00AF6B, #1ea3b1, #1d6197);
+            padding: 10px;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+ 
+        .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+ 
+    /* Add transition properties here */
+     transition: opacity 10s ease, transform 10s ease; /* Adjust transition duration here */
+}
+       
+ 
+        .footer-section {
+            flex-basis: 30%;
+            margin-bottom: 20px;
+            text-align: left; /* Align text to the left */
+        }
+ 
+        .footer-section h4 {
+            margin-bottom: 10px;
+        }
+ 
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0; /* Remove default margin */
+        }
+ 
+        .footer-section ul li {
+            margin-bottom: 5px;
+            padding-left: 0; /* Remove default padding */
+        }
+ 
+        /* Adjust services list alignment */
+        .footer-section:nth-child(2) ul {
+            padding-left: 0; /* Remove padding for the services list */
+            margin-left: 0; /* Remove margin for the services list */
+        }
+ 
+        /* CSS for the follow us section */
+        .follow-us-section {
+            text-align: center; /* Center align text */
+        }
+ 
+        .social-media-icons a {
+            font-size: 2rem; /* Increase icon size */
+            color: white; /* Set icon color to white */
+            margin: 0 10px; /* Add some spacing between icons */
+        }
+ 
+        /* Add CSS for transition effect */
+        .footer-container.transition {
+            opacity: 1;
+            transform: translateX(0);
+        }
+ 
+        /* Adjust transition timing and easing */
+        .footer-container {
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+          .navbar-brand img {
+            max-width: 10%;
+            height: auto;
+        }
+        .welcome-section {
+            text-align: center;
+            padding: 100px 0;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .footer-section {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .footer-section h4 {
+            margin-bottom: 15px;
+        }
+        .social-media-icons a {
+            margin-right: 10px;
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+            }
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }

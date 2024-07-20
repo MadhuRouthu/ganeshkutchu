@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #timer {
+            font-size: 14px;
+            color: #999;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>OTP Verification</h2>
+        <p>Please enter the OTP sent to your email.</p>
+        <form id="otpForm" onsubmit="return verifyOTP()" th:action="@{/verify}" method="post">
+            <input type="hidden" id="emailID" name="emailID" th:value="${emailID}">
+            <input type="text" id="otp" name="otp" th:value="${otp}" placeholder="Enter OTP" required>
+            <button type="submit">Verify OTP</button>
+        </form>
+        <div id="timer">OTP will expire in <span id="countdown">60</span> seconds.</div>
+        <form th:action="regenerate-otp"  method="post">
+        <input type="hidden" id="emailID" name="emailID" th:value="${emailID}">
+        <button id="regenerateBtn" onclick="regenerateOTP()" style="display:none">Regenerate OTP</button>
+        </form>
+        
+    </div>
+
+    <script>
+    let timeLeft = 60;
+    const countdownElement = document.getElementById('countdown');
+    const regenerateBtn = document.getElementById('regenerateBtn');
+    const verifyBtn = document.querySelector('button[type="submit"]'); // Select the verify button
+
+    function updateCountdown() {
+        if (timeLeft > 0) {
+            countdownElement.textContent = timeLeft;
+            timeLeft--;
+        } else {
+            countdownElement.textContent = 'Expired';
+            document.getElementById('otpForm').onsubmit = function() { return false; };
+            regenerateBtn.style.display = 'block'; // Show the regenerate button after OTP expires
+            verifyBtn.style.display = 'none'; // Hide the verify button after OTP expires
+            clearInterval(countdownInterval);
+        }
+    }
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    function regenerateOTP() {
+        timeLeft = 60;
+        countdownElement.textContent = timeLeft;
+        document.getElementById('otpForm').onsubmit = function() { return true; }; // Enable form submission
+        regenerateBtn.style.display = 'none'; // Hide the regenerate button
+        verifyBtn.style.display = 'inline-block'; // Show the verify button
+        clearInterval(countdownInterval);
+        countdownInterval = setInterval(updateCountdown, 1000);
+        alert('Regenerating OTP...');
+        // Add logic to request a new OTP from the server if needed
+    }
+
+    function verifyOTP() {
+        const otpInput = document.getElementById('otp').value;
+        const email = document.getElementById('emailID').value;
+
+        if (!otpInput || otpInput.length !== 6) {
+            alert('Invalid OTP. Please enter a 6-digit OTP.');
+            return false;
+        } else {
+            alert('OTP verified successfully for ' + email);
+            return true;
+        }
+    }
+</script>
+
+</body>
+</html>

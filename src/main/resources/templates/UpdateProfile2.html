@@ -1,0 +1,827 @@
+
+<!-- UpdateProfile2.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Profile</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="/css/UpdateProfile.css" rel="stylesheet">
+</head>
+<body>
+	<!-- Your HTML content for Update Profile page goes here -->
+	<main>
+
+		<div class="component-container">
+			<div class="container">
+
+				<div class="section-buttons">
+
+					<button
+						onclick="scrollToComponent('education'); setActive('education')">Education</button>
+					<button
+						onclick="scrollToComponent('it_skills'); setActive('it_skills')">IT
+						Skills</button>
+					<button
+						onclick="scrollToComponent('projects'); setActive('projects')">Projects</button>
+					<button
+						onclick="scrollToComponent('personal_details'); setActive('personal_details')">Personal
+						Details</button>
+					<button onclick="scrollToComponent('resume'); setActive('resume')">Resume</button>
+				</div>
+
+				<!-- Components for each section -->
+				<div class="component card">
+
+					<div class="profile-container">
+						<div class="profile-image-container">
+							<div class="profile-image"></div>
+							<button onclick="uploadFile()" class="update-button"
+								id="updateButton" aria-label="Update Profile Picture"></button>
+							<input type="file" id="fileInput" class="file-input"
+								accept="image/*">
+						</div>
+						<div class="person-details">
+							<label for="name">Name:</label> <span id="name">Uday Kiran</span>
+						</div>
+						<div class="person-details">
+							<label for="email">Email:</label> <span id="email">udaykian9@gmail.com</span>
+						</div>
+					</div>
+
+				</div>
+
+				<!--  
+  
+  <div class="confirmation-dialog" id="confirmationDialog">
+    <div class="jumping-symbol">&#9888;</div>
+    <h2>Are you sure you want to proceed?</h2>
+    <button onclick="confirmAction()">OK</button>
+</div>
+
+ -->
+
+
+				<!-- Education component content -->
+				<div id="education" class="component card">
+					<div class="educationcontainer">
+
+						<!-- Your education form here -->
+						<br>
+						<h2>Add Education</h2>
+
+						<!-- All education forms within a single form element -->
+						<form id="educationForm" action="/saveEducation" method="post">
+
+							<!-- Graduation and Post Graduation Details -->
+							<div class="row" style="width: 820px;">
+
+								<!-- Graduation Details Card -->
+								<div class="col-md-6">
+
+									<h3 class="card-title">Graduation Details</h3>
+									<div class="form-group">
+										<label for="Graduation_College_Name">College Name:</label> <input
+											type="text" class="form-control" id="Graduation_College_Name"
+											name="Graduation_College_Name"
+											placeholder="Enter College Name..." required>
+									</div>
+									<div class="form-group">
+										<label for="Graduation_University">University:</label> <input
+											type="text" class="form-control" id="Graduation_University"
+											name="Graduation_University"
+											placeholder="Enter University..." required>
+									</div>
+									<div class="form-group">
+										<label for="Graduation_Specialization">Course Stream:</label>
+										<select class="form-control" id="Graduation_Specialization"
+											name="Graduation_Specialization" required>
+											<option value="">Select Course Stream</option>
+											<option value="B.Tech">B.Tech</option>
+											<option value="BSC">BSC</option>
+											<option value="Bcom">B.com</option>
+											<option value="BCA">BZC</option>
+											<option value="MPCS">MPCS</option>
+											<option value="MSCS">MSCS</option>
+											<option value="MECS">MECS</option>
+											<option value="EEE">EEE</option>
+											<option value="ECE">ECE</option>
+											<option value="CSE">CSE</option>
+											<!-- Add more course streams as needed -->
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="Graduation_GPA">GPA:</label> <input type="text"
+											class="form-control" id="Graduation_GPA"
+											name="Graduation_GPA" placeholder="Enter GPA..." required>
+									</div>
+									<div class="form-group">
+										<label for="Graduation_YOP">Year of Passing:</label> <select
+											class="form-control" id="Graduation_YOP"
+											name="Graduation_YOP" required>
+											<option value="">Select Year</option>
+											<option value="2015">2015</option>
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<!-- Add more years as needed -->
+										</select>
+									</div>
+									<!-- Add Project Button -->
+									<label for="Graduation_Project">Add Project:</label>
+									<textarea class="form-control" id="Graduation_Project"
+										name="Graduation_Project" rows="4" required></textarea>
+								</div>
+
+
+								<!-- Post Graduation Details Card -->
+
+								<div class="col-md-6">
+
+									<h3 class="card-title">PG_Details</h3>
+									<div class="form-group">
+										<label for="Post_Graduation_College_Name">College
+											Name:</label> <input type="text" class="form-control"
+											id="Post_Graduation_College_Name"
+											name="Post_Graduation_College_Name"
+											placeholder="Enter College Name..." required>
+									</div>
+									<div class="form-group">
+										<label for="Post_Graduation_University">University:</label> <input
+											type="text" class="form-control"
+											id="Post_Graduation_University"
+											name="Post_Graduation_University"
+											placeholder="Enter University..." required>
+									</div>
+									<div class="form-group">
+										<label for="Post_Graduation_Specialization">Course
+											Stream:</label> <select class="form-control"
+											id="Post_Graduation_Specialization"
+											name="Post_Graduation_Specialization" required>
+											<option value="">Select Course Stream</option>
+											<option value="MCA">MCA</option>
+											<option value="MBA">MBA</option>
+											<option value="MTech">MTech</option>
+											<!-- Add more course streams as needed -->
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="Post_Graduation_GPA">GPA:</label> <input
+											type="text" class="form-control" id="Post_Graduation_GPA"
+											name="Post_Graduation_GPA" placeholder="Enter GPA..."
+											required>
+									</div>
+									<div class="form-group">
+										<label for="Post_Graduation_YOP">Year of Passing:</label> <select
+											class="form-control" id="Post_Graduation_YOP"
+											name="Post_Graduation_YOP" required>
+											<option value="">Select Year</option>
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<!-- Add more years as needed -->
+										</select>
+									</div>
+									<!-- Add Project Button -->
+									<label for="Post_Graduation_Project">Add Project:</label>
+									<textarea class="form-control" id="Post_Graduation_Project"
+										name="Post_Graduation_Project" rows="4" required></textarea>
+								</div>
+							</div>
+
+							<br> <br>
+							<!-- 10th and 12th Details -->
+							<div class="row" style="width: 820px;">
+
+								<!-- SSC Details Card-->
+								<div class="col-md-6">
+
+									<h3 class="card-title">10th Details</h3>
+									<div class="form-group">
+										<label for="SSC_School_Name">School Name:</label> <input
+											type="text" class="form-control" id="SSC_School_Name"
+											name="SSC_School_Name" placeholder="Enter School Name..."
+											required>
+									</div>
+									<div class="form-group">
+										<label for="SSCBoard">SSC Board:</label> <input type="text"
+											class="form-control" id="SSCBoard" name="SSCBoard"
+											placeholder="Enter SSC Board..." required>
+									</div>
+									<div class="form-group">
+										<label for="SSCCourseStream">Course Stream:</label> <select
+											class="form-control" id="SSCCourseStream"
+											name="SSCCourseStream" required>
+											<option value="">Select Course Stream</option>
+											<option value="SSC">SSC</option>
+											<option value="CBSC">CBSC</option>
+											<!-- Add more course streams as needed -->
+										</select>
+									</div>
+									<!-- Add more fields as needed -->
+									<div class="form-group">
+										<label for="SSC_Marks">GPA:</label> <input type="text"
+											class="form-control" id="SSC_Marks" name="SSC_Marks"
+											placeholder="Enter GPA..." required>
+									</div>
+									<div class="form-group">
+										<label for="SSC_YOP">Year of Passing:</label> <select
+											class="form-control" id="SSC_YOP" name="SSC_YOP" required>
+											<option value="">Select Year</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<!-- Add more years as needed -->
+										</select>
+									</div>
+
+								</div>
+
+								<!-- Intermediate Details Card -->
+								<div class="col-md-6">
+
+									<h3 class="card-title">12th Details</h3>
+									<div class="form-group">
+										<label for="Inter_College">College Name:</label> <input
+											type="text" class="form-control" id="Inter_College"
+											name="Inter_College" placeholder="Enter College Name..."
+											required>
+									</div>
+									<div class="form-group">
+										<label for="InterBoard">University:</label> <input type="text"
+											class="form-control" id="InterBoard" name="InterBoard"
+											placeholder="Enter University..." required>
+									</div>
+									<!-- Add more fields as needed -->
+									<div class="form-group">
+										<label for="Inter_Group">Course Stream:</label> <select
+											class="form-control" id="Inter_Group" name="Inter_Group"
+											required>
+											<option value="">Select Course Stream</option>
+											<option value="MPC">MPC</option>
+											<option value="MEC">MEC</option>
+											<option value="CEC">CEC</option>
+											<option value="Bipc">Bipc</option>
+											<!-- Add more course streams as needed -->
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="Inter_Marks">GPA:</label> <input type="text"
+											class="form-control" id="Inter_Marks" name="Inter_Marks"
+											placeholder="Enter GPA..." required>
+									</div>
+									<div class="form-group">
+										<label for="Inter_YOP">Year of Passing:</label> <select
+											class="form-control" id="Inter_YOP" name="Inter_YOP" required>
+											<option value="">Select Year</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<!-- Add more years as needed -->
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Submit Button -->
+							<button type="button" onclick="saveEducation()"
+								class="btn btn-primary mt-3">Save</button>
+							<!-- <button type="button" onclick="showConfirmationDialog()" class="btn btn-primary mt-3">Submit</button>
+ -->
+						</form>
+					</div>
+
+				</div>
+				<!-- IT Skills component content -->
+				<div id="it_skills" class="component card">
+					<div class="container">
+						<form id="itSkillsForm" method="post" th:action="@{/saveSkills}">
+							<h2>Add IT Skills</h2>
+							<br>
+							<!-- IT skills form fields -->
+							<div class="form-group">
+
+								<label for="skillName">Skill/Software Name:</label> <select
+									id="skillName" name="skillName">
+									<option value="">Select Skill/Software</option>
+									<option value="Java">Java</option>
+									<option value="Python">Python</option>
+									<option value="JavaScript">JavaScript</option>
+									<option value="AWS">AWS</option>
+									<option value="SpringBoot">SpringBoot</option>
+									<option value="SAP">SAP</option>
+									<option value="CaseManager">CaseManager</option>
+									<option value="Dotnet">Dotnet</option>
+									<option value="BPM">BPM</option>
+									<option value="salesforce">salesforce</option>
+									<option value="AI">AI</option>
+									<option value="Devops">Devops</option>
+									<option value="Mobile">Mobile</option>
+									<option value="Reactjs">Reactjs</option>
+									<option value="Nodejs">Nodejs</option>
+									<option value="Angularjs">Angularjs</option>
+									<option value="kuburnets">kuburnets</option>
+									<option value="User Experience Design">User Experience
+										Design</option>
+									<option value="Sharepoins">Sharepoins</option>
+									<option value="PowerApps">PowerApps</option>
+									<option value="PowerBI">PowerBI</option>
+									<option value="PowerAutomate">PowerAutomate</option>
+									<option value="Oracle">Oracle</option>
+									<option value="MySql">MySql</option>
+									<option value="SQL">SQL</option>
+									<option value="DB2">DB2</option>
+									<option value="PostGradeSql">PostGradeSql</option>
+									<option value="DBMS">DBMS</option>
+									<option value="BigData">BigData</option>
+									<option value="DataScience">DataScience</option>
+									<option value="VLSI">VLSI</option>
+									<option value="RDBMS">RDBMS</option>
+									<option value="jquery">JQuery</option>
+									<option value="Bootstrap">Bootstrap</option>
+									<option value="DataAnalytics">DataAnalytics</option>
+									<option value="BusinessAnalytics">BusinessAnalytics</option>
+									<option value="Tableau">Tableau</option>
+									<option value="Spark">Spark</option>
+									<option value="CyberSecurity">CyberSecurity</option>
+									<option value="Internet of Things">Internet of Things</option>
+									<option value="MechineLearning">MechineLearning</option>
+									<!-- Add more skills/software as needed -->
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="experienceYears">Experience:</label> <select
+									id="experienceYears" name="experienceYears">
+									<option value="">Years</option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<!-- Add more years as needed -->
+								</select>
+							</div>
+							<div id="skillsContainer"></div>
+							<div id="selectedSkillsHeading" style="display: none;">
+								<h3>Selected Skills</h3>
+								<div id="selectedSkills"></div>
+							</div>
+							<button type="button" onclick="addSkill()">Add Skill</button>
+							<div id="validationMessage" class="validation-message"></div>
+							<div class="form-group">
+								<label for="status">Working Status:</label>
+								<div class="form-check">
+									<input class="form-check-input" type="radio"
+										name="workingStatus" id="fresher" value="Fresher" required
+										onchange="toggleProjectForm(this)"> <label
+										class="form-check-label" for="fresher"> Fresher </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio"
+										name="workingStatus" id="experienced" value="Experienced"
+										required onchange="toggleProjectForm(this)"> <label
+										class="form-check-label" for="experienced">
+										Experienced </label>
+								</div>
+							</div>
+
+							<button type="button" class="btn btn-success"
+								onclick="submitItskills()">Save</button>
+							<input type="hidden" id="skillData" name="skillData"
+								th:value="${skillData}" />
+						</form>
+						<script>
+							function toggleProjectForm(radioButton) {
+								var projectForm = document
+										.getElementById('projects');
+								if (radioButton.value === 'Fresher') {
+									projectForm.style.display = 'none'; // Hide the project details form
+								} else {
+									projectForm.style.display = 'block'; // Show the project details form
+								}
+							}
+
+							// Assuming loginResponse is properly defined and contains the candidateDetails object
+
+							// Set the selected skill name in the dropdown
+							var skillNameSelect = document
+									.getElementById('skillName');
+							var selectedSkillName = loginResponse.candidateDetails.skillName;
+							for (var i = 0; i < skillNameSelect.options.length; i++) {
+								if (skillNameSelect.options[i].value === selectedSkillName) {
+									skillNameSelect.options[i].selected = true;
+									break;
+								}
+							}
+
+							// Set the selected experience years in the dropdown
+							var experienceYearsSelect = document
+									.getElementById('experienceYears');
+							var selectedExperienceYears = loginResponse.candidateDetails.experience.experienceYears;
+							for (var i = 0; i < experienceYearsSelect.options.length; i++) {
+								if (experienceYearsSelect.options[i].value === selectedExperienceYears) {
+									experienceYearsSelect.options[i].selected = true;
+									break;
+								}
+							}
+
+							// Set the working status radio button
+							var workingStatusValue = loginResponse.candidateDetails.workingStatus;
+							if (workingStatusValue === 'Fresher') {
+								document.getElementById('fresher').checked = true;
+							} else if (workingStatusValue === 'Experienced') {
+								document.getElementById('experienced').checked = true;
+							}
+						</script>
+					</div>
+				</div>
+
+				<!-- project details -->
+				<div id="projects" class="component card">
+					<div class="container">
+						<h2>Add Project</h2>
+						<form id="projectForm" action="/saveProject" method="post">
+							<div class="form-group">
+								<label for="projectTitle">Project Title:</label> <input
+									type="text" class="form-control" id="projectTitle"
+									name="projectTitle" required>
+							</div>
+							<div class="form-group">
+								<label for="client">Client:</label> <input type="text"
+									class="form-control" id="client" name="client" required>
+							</div>
+							<!-- Project Status -->
+							<div class="form-group">
+								<label>Project Status:</label><br>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio"
+										name="projectStatus" id="inProgress" value="true" checked>
+									<label class="form-check-label" for="inProgress">In
+										Progress</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio"
+										name="projectStatus" id="finished" value="false"> <label
+										class="form-check-label" for="finished">Finished</label>
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="workedFromYear">Worked From (Year):</label> <input
+										type="text" class="form-control" id="workedFromYear"
+										name="workedFromYear" placeholder="YYYY-MM-DD" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="workedFromMonth">Worked From (Month):</label> <input
+										type="text" class="form-control" id="workedFromMonth"
+										name="workedFromMonth" placeholder="YYYY-MM-DD" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="projectDetails">Details of Project:</label>
+								<textarea class="form-control" id="projectDetails"
+									name="projectDetails" rows="4" required></textarea>
+							</div>
+							<!-- Additional form fields can be added here -->
+
+							<button type="button" class="btn btn-success"
+								onclick="saveProject()">Save</button>
+							<!-- <button type="button" class="btn btn-danger" onclick="cancel()">Cancel</button> -->
+						</form>
+					</div>
+
+				</div>
+				<!-- Personal Details component content -->
+				<div id="personal_details" class="component card">
+					<h3>Personal Details</h3>
+					<div class="container">
+						<!-- Your personal details form here -->
+						<form id="PersonalForm" action="/savePD" method="post">
+							<!-- Candidate Name -->
+							<div class="form-group">
+								<label for="candidate_Name">Candidate Name:</label> <input
+									type="text" id="candidate_Name" name="candidate_Name"
+									class="form-control" placeholder="Enter candidate name"
+									required>
+							</div>
+
+							<!-- Age -->
+							<div class="form-group">
+								<label for="age">Age:</label> <input type="number" id="age"
+									name="age" class="form-control" placeholder="Enter Person Age "
+									required>
+							</div>
+
+							<!-- Gender -->
+							<div class="form-group">
+								<label>Gender:</label>
+								<div class="form-check-inline">
+									<input class="form-check-input" type="radio" id="male"
+										name="gender" value="Male" required> <label
+										class="form-check-label" for="male">Male</label>
+								</div>
+								<div class="form-check-inline">
+									<input class="form-check-input" type="radio" id="female"
+										name="gender" value="Female" required> <label
+										class="form-check-label" for="female">Female</label>
+								</div>
+							</div>
+							<!-- Martial status -->
+							<div class="form-group">
+								<label>Martial Status:</label>
+								<div class="form-check-inline">
+									<input class="form-check-input" type="radio" id="married"
+										name="Marital_Status" value="Married" required> <label
+										class="form-check-label" for="married">Married</label>
+								</div>
+								<div class="form-check-inline">
+									<input class="form-check-input" type="radio" id="single"
+										name="Marital_Status" value="Single" required> <label
+										class="form-check-label" for="single">Single</label>
+								</div>
+							</div>
+
+							<!-- Language Known -->
+							<div class="form-group">
+								<label for="language_Known">Language Known:</label> <select
+									id="language_Known" name="language_Known" class="form-control"
+									required>
+									<option value="" disabled selected>Select Language</option>
+									<option value="Telugu">Telugu</option>
+									<option value="English">English</option>
+									<option value="Tamil">Tamil</option>
+									<option value="Kannada">Kannada</option>
+									<option value="Malayalam">Malayalam</option>
+								</select>
+							</div>
+							<div class="languageselected">
+								<button type="button" onclick="addLanguage()">ADD</button>
+							</div>
+							<div id="selectedLanguages" class="form-group"></div>
+							<!-- Div to display selected languages -->
+
+
+
+							<!-- Door Number -->
+							<div class="form-group">
+								<label for="door_No">Door Number:</label> <input type="text"
+									id="door_No" name="door_No" class="form-control"
+									placeholder="Enter The Door Number" required>
+							</div>
+
+							<!-- Street -->
+							<div class="form-group">
+								<label for="street">Street:</label> <input type="text"
+									id="street" name="street" class="form-control"
+									placeholder="Enter The Street " required>
+							</div>
+
+							<!-- Landmark -->
+							<div class="form-group">
+								<label for="landMark">Landmark:</label> <input type="text"
+									id="landMark" name="landMark" class="form-control"
+									placeholder="Enter The LandMark " required>
+							</div>
+
+							<!-- Mandal -->
+							<div class="form-group">
+								<label for="mandal">Mandal:</label> <input type="text"
+									id="mandal" name="mandal" class="form-control"
+									placeholder="Enter The Mandal " required>
+							</div>
+
+							<!-- District -->
+							<div class="form-group">
+								<label for="distric">District:</label> <input type="text"
+									id="distric" name="distric" class="form-control"
+									placeholder="Enter The Distric " required>
+							</div>
+
+							<!-- State -->
+							<div class="form-group">
+								<label for="state">State:</label> <input type="text" id="state"
+									name="state" class="form-control"
+									placeholder="Enter The State " required>
+							</div>
+
+							<!-- Pincode -->
+							<div class="form-group">
+								<label for="pincode">Pincode:</label> <input type="number"
+									id="pincode" name="pincode" class="form-control"
+									placeholder="Enter The Pincode " required>
+							</div>
+
+							<!-- Current City -->
+							<div class="form-group">
+								<label for="current_City">Current City:</label> <input
+									type="text" id="current_City" name="current_City"
+									class="form-control" placeholder="Enter The Current City "
+									required>
+							</div>
+							<!-- Submit Button -->
+							<div class="button-group">
+								<!-- <button type="button" class="btn btn-primary"
+									onclick="cancelForm()">Cancel</button> -->
+								<button type="button" class="btn btn-primary"
+									onclick="submitPersonalDetails()">Save</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- Resume component content -->
+				<div id="resume" class="component card">
+
+					<br>
+
+					<h3>Resume</h3>
+
+					<br>
+					<div class="d-flex justify-content-center">
+						<input type="file" id="resumeFile" style="display: none;">
+						<label class="uploadresumetext" for="resumeFile" id="uploadLabel">Upload
+							Resume</label> <br>
+					</div>
+					<div class="button-group">
+						<div class="uploadresumebutton">
+							<button type="button" class="btn btn-primary"
+								onclick="uploadResume()">Upload</button>
+						</div>
+						<br> <label class="downloadresumelabel">Click The
+							below link to download the Resume</label> <br> <a
+							class="downloadresumetext" th:href="@{/download}">Download
+							Resume</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="/js/UpdateProfile.js"></script>
+
+	<script>
+		// Function to parse URL query parameters
+		function getParameterByName(name, url) {
+			if (!url)
+				url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex
+					.exec(url);
+			if (!results)
+				return null;
+			if (!results[2])
+				return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+		// Extract loginResponseJson from URL query parameters
+		var loginResponseJson = getParameterByName('loginResponseJson');
+
+		// Parse the JSON string into a JavaScript object
+		var loginResponse = JSON.parse(loginResponseJson);
+
+		// Now you can use loginResponse object to update your page
+		console.log(loginResponse); // Example: Log the loginResponse object to the console
+
+		document.getElementById("candidate_Name").value = loginResponse.candidateDetails.register.fullName;
+		console.log("Candidate name is:",
+				loginResponse.candidateDetails.register.fullName);
+
+		document.getElementById("age").value = loginResponse.candidateDetails.age;
+
+		var genderValue = loginResponse.candidateDetails.gender;
+		if (genderValue === 'Male') {
+			document.getElementById('male').checked = true;
+		} else if (genderValue === 'Female') {
+			document.getElementById('female').checked = true;
+		}
+
+		var maritalStatusValue = loginResponse.candidateDetails.marital_Status;
+		if (maritalStatusValue === 'Married') {
+			document.getElementById('married').checked = true;
+		} else if (maritalStatusValue === 'Single') {
+			document.getElementById('single').checked = true;
+		}
+
+		document.getElementById("door_No").value = loginResponse.candidateDetails.d_No;
+		console.log("Candidate door number is:",
+				loginResponse.candidateDetails.door_No);
+		document.getElementById("street").value = loginResponse.candidateDetails.street;
+		document.getElementById("landMark").value = loginResponse.candidateDetails.landMark;
+		document.getElementById("mandal").value = loginResponse.candidateDetails.mandal;
+		document.getElementById("distric").value = loginResponse.candidateDetails.district;
+		document.getElementById("state").value = loginResponse.candidateDetails.state;
+		document.getElementById("pincode").value = loginResponse.candidateDetails.pincode;
+		document.getElementById("current_City").value = loginResponse.candidateDetails.currentCity;
+		document.getElementById("language_Known").value = loginResponse.candidateDetails.language_Known;
+
+		// Assign values to the education form fields
+		document.getElementById("Graduation_College_Name").value = loginResponse.candidateDetails.graduation_College_Name;
+		document.getElementById("Graduation_University").value = loginResponse.candidateDetails.graduation_University;
+		document.getElementById("Graduation_Specialization").value = loginResponse.candidateDetails.graduation_Specialization;
+		document.getElementById("Graduation_GPA").value = loginResponse.candidateDetails.graduation_GPA;
+		document.getElementById("Graduation_YOP").value = loginResponse.candidateDetails.graduation_YOP;
+		document.getElementById("Graduation_Project").value = loginResponse.candidateDetails.graduation_Project;
+
+		// Post Graduation details are not provided in the logicresponse, so fields for post graduation details are not assigned
+		document.getElementById("Post_Graduation_College_Name").value = loginResponse.candidateDetails.post_Graduation_College_Name;
+		document.getElementById("Post_Graduation_University").value = loginResponse.candidateDetails.post_Graduation_University;
+		document.getElementById("Post_Graduation_Specialization").value = loginResponse.candidateDetails.post_Graduation_Specialization;
+		document.getElementById("Post_Graduation_GPA").value = loginResponse.candidateDetails.post_Graduation_GPA;
+		document.getElementById("Post_Graduation_YOP").value = loginResponse.candidateDetails.post_Graduation_YOP;
+		document.getElementById("Post_Graduation_Project").value = loginResponse.candidateDetails.post_Graduation_Project;
+		// SSC details
+		document.getElementById("SSC_School_Name").value = loginResponse.candidateDetails.SSC_School_Name;
+		document.getElementById("SSCBoard").value = loginResponse.candidateDetails.SSCBoard;
+		document.getElementById("SSCCourseStream").value = loginResponse.candidateDetails.SSCCourseStream;
+		document.getElementById("SSC_Marks").value = loginResponse.candidateDetails.SSC_Marks;
+		document.getElementById("SSC_YOP").value = loginResponse.candidateDetails.SSC_YOP;
+
+		// Intermediate details
+		document.getElementById("Inter_College").value = loginResponse.candidateDetails.inter_College;
+		document.getElementById("InterBoard").value = loginResponse.candidateDetails.interBoard;
+		document.getElementById("Inter_Group").value = loginResponse.candidateDetails.inter_Group;
+		document.getElementById("Inter_Marks").value = loginResponse.candidateDetails.inter_Marks;
+		document.getElementById("Inter_YOP").value = loginResponse.candidateDetails.inter_YOP;
+
+		// Project details
+		document.getElementById("projectTitle").value = loginResponse.experience.candidateDetails.graduation_Project;
+		document.getElementById("client").value = loginResponse.experience.candidateDetails.graduation_College_Name;
+		var workingstatus = loginResponse.experience.workingStatus;
+		if (workingstatus === 'Experienced') {
+			document.getElementById('experienced').checked = true;
+		} else if (maritalStatusValue === 'Fresher') {
+			document.getElementById('fresher').checked = true;
+		}
+		document.querySelector('input[name="projectStatus"][value="'
+				+ (loginResponse.experience.experienceYears !== "0" ? "true"
+						: "false") + '"]').checked = true;
+		document.getElementById("workedFromYear").value = loginResponse.projectDetails.workedFromYear;
+		document.getElementById("workedFromMonth").value = loginResponse.projectDetails.workedFromMonth; // No month provided in the response
+		document.getElementById("projectDetails").value = loginResponse.projectDetails.projectDetails; // No project details provided in the response
+
+		// Get the select element
+		var languageKnownSelect = document.getElementById('language_Known');
+
+		// Get the value of language known from loginResponse
+		var languageKnownValue = loginResponse.candidateDetails.language_Known;
+
+		// Loop through each option in the select element
+		for (var i = 0; i < languageKnownSelect.options.length; i++) {
+			// Check if the current option's value matches the languageKnownValue
+			if (languageKnownSelect.options[i].value === languageKnownValue) {
+				// Set the current option as selected
+				languageKnownSelect.options[i].selected = true;
+				// Exit the loop since the option has been found and selected
+				break;
+			}
+		}
+
+		// IT skills
+		document.getElementById("skillName").value = loginResponse.experience.skillName;
+		document.getElementById("experienceYears").value = loginResponse.experience.experienceYears
+				.split(' ')[0];
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Project Form</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add Project</h2>
+
+    <form action="#" method="post" onsubmit="submitForm()">
+        <div class="form-group">
+            <label for="projectTitle">Project Title:</label>
+            <input type="text" class="form-control" id="projectTitle" name="projectTitle" required>
+        </div>
+
+        <div class="form-group">
+            <label>Tag this project with Employment/Education:</label>
+            <select class="form-control" id="tagProject" name="tagProject">
+                <option value="employment">Employment</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option> <!-- Dummy value -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="client">Client:</label>
+            <input type="text" class="form-control" id="client" name="client" required>
+        </div>
+
+        <div class="form-group">
+            <label>Project Status:</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="status" id="inProgress" value="inProgress" checked>
+                <label class="form-check-label" for="inProgress">In Progress</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="status" id="finished" value="finished">
+                <label class="form-check-label" for="finished">Finished</label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="workedFromYear">Worked From (Year):</label>
+                <input type="text" class="form-control" id="workedFromYear" name="workedFromYear" placeholder="YYYY" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="workedFromMonth">Worked From (Month):</label>
+                <input type="month" class="form-control" id="workedFromMonth" name="workedFromMonth" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="projectDetails">Details of Project:</label>
+            <textarea class="form-control" id="projectDetails" name="projectDetails" rows="4" required></textarea>
+        </div>
+
+        <div id="moreDetailsSection"></div>
+
+        <button type="button" class="btn btn-primary" onclick="addMoreDetails()">Add More Details</button>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-danger" onclick="cancel()">Cancel</button>
+    </form>
+</div>
+
+<script>
+function addMoreDetails() {
+    const moreDetailsSection = document.getElementById('moreDetailsSection');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'form-control';
+    input.name = 'moreDetails[]';
+    input.placeholder = 'Additional detail';
+    moreDetailsSection.appendChild(input);
+    moreDetailsSection.appendChild(document.createElement('br'));
+}
+
+function cancel() {
+    // Redirect or perform other cancel actions
+    alert('Cancelled');
+}
+
+function sendDataToBackend(data) {
+    // Replace 'http://example.com/api/endpoint' with your actual backend API endpoint
+    const endpoint = 'http://example.com/api/endpoint';
+
+    // Make a POST request to the endpoint
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Data sent successfully');
+            // Optionally, perform actions after successful data submission
+        } else {
+            console.error('Failed to send data');
+            // Optionally, handle errors
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Optionally, handle errors
+    });
+}
+
+function submitForm() {
+    const projectTitle = document.getElementById('projectTitle').value;
+    const tagProject = document.getElementById('tagProject').value;
+    const client = document.getElementById('client').value;
+    const status = document.querySelector('input[name="status"]:checked').value;
+    const workedFromYear = document.getElementById('workedFromYear').value;
+    const workedFromMonth = document.getElementById('workedFromMonth').value;
+    const projectDetails = document.getElementById('projectDetails').value;
+
+    // Construct the data object to be sent to the backend
+    const data = {
+        projectTitle: projectTitle,
+        tagProject: tagProject,
+        client: client,
+        status: status,
+        workedFromYear: workedFromYear,
+        workedFromMonth: workedFromMonth,
+        projectDetails: projectDetails
+        // Add other form fields as needed
+    };
+
+    // Send the data to the backend
+    sendDataToBackend(data);
+}
+</script>
+
+</body>
+</html>

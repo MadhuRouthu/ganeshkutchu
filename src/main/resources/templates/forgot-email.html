@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Enter Email</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="emailForm" th:action="send-otp" th:method="post" th:object="${forgotDto}" onsubmit="return validateEmail()">
+        <h2>Forgot Password</h2>
+        <label for="email">Email:</label>
+        <input type="email" th:field="*{email}" id="email" name="email" required>
+        <div th:if="${errorMessage}" class="error-message">
+			<p th:text="${errorMessage}"></p>
+		</div>
+        <input type="submit" value="Send OTP">
+        <p class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+    </form>
+
+    <script>
+        function validateEmail() {
+            var emailInput = document.getElementById("email");
+            var email = emailInput.value.trim();
+
+            // Basic email validation
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                document.querySelector('.error-message').innerText = "Please enter a valid email address.";
+                emailInput.focus();
+                return false;
+            } else {
+                document.querySelector('.error-message').innerText = "";
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

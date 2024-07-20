@@ -1,0 +1,48 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrollable Sections with Cards</title>
+<link rel="stylesheet" href="css/ProfileDetails.css">
+</head>
+<body>
+
+<div id="container" th:include="it_skills :: it_skillsFragment">
+  <div id="buttonContainer">
+    <button onclick="scrollToSection('section1')">Resume</button>
+    <button onclick="scrollToSection('section2')">Education</button>
+    <button onclick="scrollToSection('section3')">ITSkills</button>
+    <button onclick="scrollToSection('section4')">Project</button>
+  </div>
+  <div id="sectionContainer">
+    <div id="section1" class="section">
+      Section 1
+      <button class="card-button" onclick="openCard('resume')">Open Card</button>
+    </div>
+    <div id="section2" class="section">
+      Section 2
+      <button class="card-button" onclick="openCard('education')">Open Card</button>
+    </div>
+    <div id="section3" class="section">
+      Section 3
+      <button class="card-button" onclick="openCard('itskills')">Open Card</button>
+    </div>
+    <div id="section4" class="section">
+      Section 4
+      <button class="card-button" onclick="openCard('project')">Open Card</button>
+    </div>
+  </div>
+</div>
+
+<div id="cardOverlay" class="card-overlay">
+  <button class="close-button" onclick="closeCard()">X</button>
+  <div id="cardContent"></div>
+</div>
+
+<script src="js/ProfileDetails.js">
+ 
+</script>
+
+</body>
+</html>

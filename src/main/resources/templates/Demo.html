@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<style>
+.table_header {
+	height: auto;
+	background-color: rgba(30, 139, 195, 0.6);
+	padding: .8rem 1rem;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	border-bottom: 5px solid #fff;
+}
+
+.table_body {
+	max-height: 450px;
+	overflow-y: auto;
+	margin-top: -1px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+thead th {
+	background-color: #AFEEEE;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+tbody td {
+	padding: 12px;
+	border-bottom: 1px solid #fff;
+}
+
+th, td {
+	padding: 12px;
+	text-align: left;
+	border: 1px solid #ddd;
+	width: calc(100%/ 6);
+	max-width: 150px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+tbody tr:last-child td {
+	border-bottom: #000;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #e6e6e6;
+}
+
+tbody tr:hover {
+	background-color: #e2e2e2;
+}
+
+.table_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header-right {
+	margin-right: 16px;
+}
+
+.search-container input[type=text] {
+	padding: 8px;
+	border: none;
+	border-radius: 5px;
+}
+
+.search-container input[type=text]:focus {
+	outline: none;
+}
+
+.search-container i {
+	color: #aaa;
+	margin-left: 8px;
+}
+
+button.view-btn {
+	padding: 5px 10px;
+	font-size: 12px;
+	background-color: rgba(0, 123, 255, 0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+button.view-btn:hover {
+	background-color: #0056b3;
+}
+
+button.edit-btn {
+	padding: 5px 10px;
+	font-size: 12px;
+	background-color: rgba(255, 193, 7, 0.7);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+button.edit-btn:hover {
+	background-color: #d39e00;
+}
+
+button.delete-btn {
+	padding: 5px 10px;
+	font-size: 12px;
+	background-color: rgba(220, 53, 69, 0.7);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+button.delete-btn:hover {
+	background-color: #c82333;
+}
+
+@media screen and (max-width: 1080px) {
+	button.view-btn, button.edit-btn, button.delete-btn {
+		padding: 3px 6px;
+		font-size: 12px;
+	}
+}
+</style>
+<body>
+
+
+	<main>
+
+		<section class="table_header">
+
+			<div class="header-left">
+				<h1 style="color: #000; font-weight: bold">Ngs Job Portal</h1>
+			</div>
+		</section>
+		<section class="table_body">
+			<table>
+				<thead>
+					<tr>
+						<th style="color: #000;">
+							<div>
+								<label>Candidate Name:</label>
+							</div>
+						</th>
+						<th style="color: #000;">
+							<div>
+								<label>Email:</label>
+							</div>
+						</th>
+						<th style="color: #000;">
+							<div>
+								<label for="location">Location:</label> <select id="location"
+									name="location">
+									<option value="">Select Location</option>
+									<option value="New York">New York</option>
+									<option value="San Francisco">San Francisco</option>
+									<option value="London">London</option>
+									<option value="Tokyo">Tokyo</option>
+									<!-- Add more options as needed -->
+								</select>
+							</div>
+						</th>
+						<th style="color: #000;">
+							<div>
+								<label for="role">Role:</label> <select id="role" name="role">
+									<option value="">Select Role</option>
+									<option value="Software Engineer">Software Engineer</option>
+									<option value="Data Analyst">Data Analyst</option>
+									<option value="Project Manager">Project Manager</option>
+									<option value="Marketing Specialist">Marketing
+										Specialist</option>
+									<!-- Add more options as needed -->
+								</select>
+							</div>
+						</th>
+						<th style="color: #000;">
+							<div>
+								<label for="workExperience">Work Experience:</label> <select
+									id="workExperience" name="workExperience">
+									<option value="">Select Work Experience</option>
+									<option value="1 years">1 years</option>
+									<option value="2 years">2 years</option>
+									<option value="3 years">3 years</option>
+									<option value="4 years">4 years</option>
+									<option value="5 years">5 years</option>
+									<!-- Add more options as needed -->
+								</select>
+							</div>
+						</th>
+						<th style="color: #000;">
+							<div>
+								<label for="skills">Skills:</label> <select id="skills"
+									name="skills">
+									<option value="">Select Skills</option>
+									<option value="Java">Java</option>
+									<option value="Python">Python</option>
+									<option value="JavaScript">JavaScript</option>
+									<option value="HTML/CSS">HTML/CSS</option>
+									<!-- Add more options as needed -->
+								</select>
+							</div>
+						</th>
+						<th style="color: #000;">Actions</th>
+						<!-- <th style="color: #000;">
+							<div>
+							<a th:href="login-profile"> view</a>
+							</div>
+						</th> -->
+					</tr>
+				</thead>
+				<thead>
+					<!-- Table header -->
+				</thead>
+				<tbody>
+					<!-- Iterate over each CandidateExperienceDTO object -->
+					<tr th:each="candidateExpDTO, row : ${details}"
+						th:id="'row_' + ${row.index}">
+						<!-- Access properties of CandidateDetails and Experience -->
+						<td th:text="${candidateExpDTO.candidateDetails.CandidateName}"></td>
+						<td th:text="${candidateExpDTO.candidateDetails.register.emailID}"></td>
+						<td th:text="${candidateExpDTO.candidateDetails.currentCity}"></td>
+						<td th:text="${candidateExpDTO.experience.role}"></td>
+						<td th:text="${candidateExpDTO.experience.experienceYears}"></td>
+						<td th:text="${candidateExpDTO.experience.skillName}"></td>
+						<td>
+							<!-- Use form directly with action method and email parameter -->
+							<form th:action="@{/view-profile}" method="post">
+								<!-- Hidden input to store email -->
+								<input type="hidden" name="email"
+									th:value="${candidateExpDTO.candidateDetails.register.emailID}" />
+								<!-- Submit button -->
+								<button type="submit">View</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<script>
+		// Function to filter table rows based on selected criteria
+		function filterTable() {
+			// Get selected values from dropdowns
+			var selectedLocation = document.getElementById("location").value;
+			var selectedRole = document.getElementById("role").value;
+			var selectedWorkExperience = document
+					.getElementById("workExperience").value;
+			var selectedSkills = document.getElementById("skills").value;
+
+			// Get all table rows
+			var rows = document.querySelectorAll(".table_body tbody tr");
+
+			// Loop through each row
+			rows.forEach(function(row) {
+				// Get cells for location, role, work experience, and skills
+				var locationCell = row.cells[0]; // Location cell is at index 0
+				var roleCell = row.cells[1]; // Role cell is at index 1
+				var experienceCell = row.cells[2]; // Experience cell is at index 2
+				var skillsCell = row.cells[3]; // Skills cell is at index 3
+
+				// Check if the row matches the selected criteria or if any criteria is empty
+				var locationMatch = selectedLocation === ""
+						|| locationCell.textContent === selectedLocation;
+				var roleMatch = selectedRole === ""
+						|| roleCell.textContent === selectedRole;
+				var experienceMatch = selectedWorkExperience === ""
+						|| experienceCell.textContent
+								.includes(selectedWorkExperience);
+				var skillsMatch = selectedSkills === ""
+						|| skillsCell.textContent.includes(selectedSkills);
+
+				// Show the row if all criteria match; otherwise, hide it
+				if (locationMatch && roleMatch && experienceMatch
+						&& skillsMatch) {
+					row.style.display = "";
+				} else {
+					row.style.display = "none";
+				}
+			});
+		}
+
+		// Add onchange event listener to all dropdowns
+		document.getElementById("location").addEventListener("change",
+				filterTable);
+		document.getElementById("role").addEventListener("change", filterTable);
+		document.getElementById("workExperience").addEventListener("change",
+				filterTable);
+		document.getElementById("skills").addEventListener("change",
+				filterTable);
+
+		// Initial call to filter table rows based on the initially selected criteria
+		filterTable();
+	</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Reset Password</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="password"],
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="resetPasswordForm" th:action="@{/reset-pwd}" th:method="post" th:object="${forgotDto}" onsubmit="return validatePassword()">
+        <h2>Reset Password</h2>
+        <label for="newPassword">New Password:</label>
+        <input type="password" th:field="*{password}" id="newPassword" name="newPassword" required>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" th:field="*{confirmPassword}" id="confirmPassword" name="confirmPassword" required>
+        <p class="error-message" id="passwordError" style="display: none;"></p>
+        <input type="submit" value="Reset Password">
+        
+    </form>
+
+    <script>
+        function validatePassword() {
+            var newPasswordInput = document.getElementById("newPassword");
+            var confirmPasswordInput = document.getElementById("confirmPassword");
+            var newPassword = newPasswordInput.value.trim();
+            var confirmPassword = confirmPasswordInput.value.trim();
+
+            // Basic password validation (can be more rigorous)
+            if (newPassword.length < 8) {
+                document.getElementById("passwordError").innerText = "Password must be at least 8 characters long.";
+                document.getElementById("passwordError").style.display = "block";
+                newPasswordInput.focus();
+                return false;
+            }
+
+            // Check if passwords match
+            if (newPassword !== confirmPassword) {
+                document.getElementById("passwordError").innerText = "Passwords do not match, Please Re-enter the Password";
+                document.getElementById("passwordError").style.display = "block";
+                confirmPasswordInput.focus();
+                return false;
+            }
+
+            // Reset error message if validation passes
+            document.getElementById("passwordError").innerText = "";
+            document.getElementById("passwordError").style.display = "none";
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>
